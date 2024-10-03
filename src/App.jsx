@@ -1,21 +1,51 @@
-import { useState } from 'react' 
+import { useState , useEffect} from 'react'  
+import {useDispatch} from 'react-redux'
 import React from 'react';
-import {Routes,Route} from 'react-router-dom'
+import {Outlet} from 'react-router-dom'
 import './App.css' 
-import './index.css'
+import './index.css' 
+import authService from './appwrite/auth' 
+import {login,logout} from './store/authSlice'
+import { Footer, Header } from './components/index';
+
 
 function App() {
-  console.log(import.meta.env.VITE_APPWRITE_URL);
+  
+  const [loading, setLoading] = useState(true); 
+  const dispatch = useDispatch(); 
 
-  return (
-    <>
-      
-      <div className='text-3xl bg-indigo-700'>blog app by chai or code </div>  
+  useEffect(() => { 
+    authService.getCurrentUser()
+    .then((userData) => {
+       if(userData){
+        dispatch(login({userData}))
+       }else{
+        dispatch(logout({useDispatch:null}))
+       }
+    }) 
+    .finally(() => {
+      setLoading(false);
+    });
 
-      
-       
-    </>
-  )
+  }, []); 
+
+// home page data rendering 
+
+return !loading ? (
+  <div className='min-h-screen flex flex-col
+   justify-between bg-black-400 text-3xl'>
+
+    <div className='w-full block'>
+      <Header />
+      <main >  
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  </div>
+) : null;
+
+  
 }
 
 export default App
