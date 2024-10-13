@@ -33,12 +33,13 @@ function App() {
 
 return !loading ? (
   <div className='min-h-screen flex flex-col
-   justify-between bg-black-400 text-3xl'>
+    bg-black-400 text-3xl
+   items-center justify-center'>
 
-    <div className='w-full block'>
+    <div className=''>
       <Header />
       <main >  
-        <Outlet />
+      TODO:  <Outlet />
       </main>
       <Footer />
     </div>
