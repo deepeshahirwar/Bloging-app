@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         sans: ['IBM Plex Sans', 'sans-serif'], // IBM Font
         serif: ['IBM Plex Serif', 'serif'],
+        lato: ['Lato', 'sans-serif']
       },
       spacing: {
         '128': '32rem',

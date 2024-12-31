@@ -35,7 +35,7 @@ function Header() {
                     onClick={() => navigate(item.slug)}
                     onMouseEnter={() => setHoveredButton(item.slug)}
                     onMouseLeave={() => setHoveredButton('')}
-                    className={`px-4 py-2 font-semibold ${
+                    className={`px-4 py-2 font-semibold font-lato ${
                       location.pathname === item.slug || hoveredButton === item.slug 
                         ? 'border-b-2 border-accent' 
                         : 'border-b-2 border-transparent'
@@ -48,7 +48,7 @@ function Header() {
             )}
             {authStatus && (
               <li className="bg-primary">
-                <LogoutBtn className="bg-primary"/>
+                <LogoutBtn />
               </li>
             )}
           </ul>
