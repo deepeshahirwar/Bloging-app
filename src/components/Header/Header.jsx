@@ -8,48 +8,26 @@ function Header() {
   const authStatus = useSelector((state) => state.auth.status);
   const navigate = useNavigate();
   const location = useLocation();
-
-  // State to track which button is being hovered
   const [hoveredButton, setHoveredButton] = useState('');
-
+       
   const navItems = [
-    {
-      name: 'Home',
-      slug: "/",
-      active: true
-    }, 
-    {
-      name: "Login",
-      slug: "/login",
-      active: !authStatus,
-    },
-    {
-      name: "Signup",
-      slug: "/signup",
-      active: !authStatus,
-    },
-    {
-      name: "All Posts",
-      slug: "/all-posts",
-      active: authStatus,
-    },
-    {
-      name: "Add Post",
-      slug: "/add-post",
-      active: authStatus,
-    },
+    { name: 'Home', slug: "/", active: true },
+    { name: "Login", slug: "/login", active: !authStatus },
+    { name: "Signup", slug: "/signup", active: !authStatus },
+    { name: "All Posts", slug: "/all-posts", active: authStatus },
+    { name: "Add Post", slug: "/add-post", active: authStatus },
   ];
 
   return (
-    <header className='py-4 shadow bg-slate-300'>
+    <header className="bg-secondary text-white shadow-lg">
       <Container>
-        <nav className='flex'>
-          <div className='mr-4'>
-            <Link to='/'>
-              <Logo width='70px' />
+        <nav className="flex items-center justify-between py-4">
+          <div className="flex items-center">
+            <Link to="/">
+              <Logo width="300px" className="text-white" />
             </Link>
           </div>
-          <ul className='flex ml-auto'>
+          <ul className="flex space-x-6">
             {navItems.map((item) => 
               item.active ? (
                 <li key={item.name}>
@@ -57,28 +35,20 @@ function Header() {
                     onClick={() => navigate(item.slug)}
                     onMouseEnter={() => setHoveredButton(item.slug)}
                     onMouseLeave={() => setHoveredButton('')}
-                    className={`inline-block px-6 py-2 duration-200 relative transition-all ${
+                    className={`px-4 py-2 font-semibold ${
                       location.pathname === item.slug || hoveredButton === item.slug 
-                        ? 'border-b-2 border-black' 
+                        ? 'border-b-2 border-accent' 
                         : 'border-b-2 border-transparent'
-                    }`}
+                    } hover:border-accent transition-all duration-200`}
                   >
                     {item.name}
-                    {/* Bottom Border Effect */}
-                    <span
-                      className={`absolute left-0 bottom-0 w-full h-[2px] bg-black transition-transform duration-500 ease-in ${
-                        hoveredButton === item.slug || location.pathname === item.slug
-                          ? 'scale-x-100'
-                          : 'scale-x-0'
-                      }`}
-                    ></span>
                   </button>
                 </li>
               ) : null
             )}
             {authStatus && (
-              <li>
-                <LogoutBtn />
+              <li className="bg-primary">
+                <LogoutBtn className="bg-primary"/>
               </li>
             )}
           </ul>

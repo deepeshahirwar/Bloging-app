@@ -6,35 +6,31 @@ import {login, logout} from "./store/authSlice"
 import { Footer, Header } from './components'
 import { Outlet } from 'react-router-dom'
 
+// src/App.jsx
 function App() {
-  const [loading, setLoading] = useState(true)
-  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    authService.getCurrentUser()
-    .then((userData) => {
-      if (userData) {
-        dispatch(login({userData}))
-      } else {
-        dispatch(logout())
-      }
-    })
-    .finally(() => setLoading(false))
-  }, [])
-  
-  return !loading ? (
-    <div className='min-h-screen flex flex-wrap content-between bg-gray-700 '>
-       
-      <div className='flex text-center items-center justify-center'>
-      <main>
-      <Header />
-        <Outlet />
-        <Footer />
-        </main>
-      </div>
-     
-    </div>
-  ) : null
-}
+    authService.getCurrentUser ()
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }));
+        } else {
+          dispatch(logout());
+        }
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
-export default App
+  return !loading ? (
+    <div className="min-h-screen flex flex-col bg-background">
+      <Header />
+      <main className="flex-grow container py-8">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  ) : null;
+} 
+export default App;

@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-text font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-bold text-primary;
+  }
+  a {
+    @apply text-link hover:text-accent transition-colors duration-200;
+  }
+  .container {
+    @apply max-w-7xl mx-auto px-4;
+  }
+  .card {
+    @apply bg-white shadow-card rounded-lg overflow-hidden;
+  }
+}
