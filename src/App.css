@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+
+@media (max-width: 768px) {
+  .md:hidden {
+    display: none;
+  }
+  .md:flex {
+    display: flex;
+  }
+  .md:space-x-6 {
+    margin-right: 1.5rem;
+  }
+}
